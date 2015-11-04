@@ -17,11 +17,13 @@ class ClientController extends \BaseController {
 	{	
 		if( Auth::check() ) 
 		{
-			$data = DB::table('client')
-					->join('status', 'client.status', '=', 'status.id')
-					->join('type', 'client.type', '=', 'type.id')
-					->select('client.id', 'client.Name', 'status.status', 'type.type')
-					->get();
+			$data = $this->client->with('status', 'type')->get();
+			
+			// $data = DB::table('client')
+			// 		->join('status', 'client.status', '=', 'status.id')
+			// 		->join('type', 'client.type', '=', 'type.id')
+			// 		->select('client.id', 'client.Name', 'status.status', 'type.type')
+			// 		->get();
 
 			return View::make('client.client')->with("data", $data);
 		}

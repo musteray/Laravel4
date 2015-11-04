@@ -8,7 +8,12 @@ class Client extends Eloquent
 
 	public function status()
 	{
-		return $this->hasOne('Status', 'id');
+		return $this->belongsTo('Status', 'id');
+	}
+
+	public function type()
+	{
+		return $this->belongsTo('Type', 'id');
 	}
 		
 }

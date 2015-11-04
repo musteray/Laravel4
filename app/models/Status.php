@@ -6,6 +6,6 @@ class Status extends Eloquent
 
 	public function client()
 	{
-		 return $this->belongsTo('Client', 'status');
+		 return $this->hasMany('Client', 'status');
 	}
 } 

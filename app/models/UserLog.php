@@ -2,5 +2,7 @@
 
 class Userlog extends Eloquent 
 {
-	protected $table = 'user_log';
+	public $timestamps = false;
+	//protected $fillable = ['user_id', 'login', 'logout', 'purpose'];
+    protected $table = 'user_log';
 }

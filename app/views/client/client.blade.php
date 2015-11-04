@@ -26,8 +26,8 @@
 		@foreach ($data as $value )
 		<tr>
 			<td> {{ $value->Name }} </td>
-			<td> {{ $value->type }} </td>
-			<td> {{ $value->status }} </td>
+			<td> {{ $value->Type->type }} </td>
+			<td> {{ $value->Status->status }} </td>
 			<td> <a href ='{{ URL::to('crud/'.$value->id.'/edit') }}'><button>Edit</button></a> </td>
 			<td>
 				{{ Form::open(array('url'=>'crud/'.$value->id, 'method'=>'DELETE')) }}

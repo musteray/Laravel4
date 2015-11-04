@@ -69,9 +69,22 @@ class UserController extends BaseController {
                 // dd(Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))));
                 if( Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))) ) 
                 {
+                    // Save to user_log table
                     $id = Auth::id();
-                    
-                    return Redirect::to('crud');
+                    $log = new UserLog;
+                    $log->user_id = $id;
+                    $log->login = date('Y-m-d H:i:s');
+                    $log->save();
+                    //
+
+                    $option = Input::get('option');
+
+                    if( $option == 'crud' ){
+                        return Redirect::to('crud');
+                    }else{
+                        return Redirect::to('api');
+                    }
+
                 }else{
                     Session::flash('message', 'Invalid credentials.');
                     return Redirect::back();
@@ -111,7 +124,6 @@ class UserController extends BaseController {
         //
         if( Auth::check() ){
             $users = User::find($id);
-
             return View::make("user.edit")->with('user', $users);
         }else{
             return Redirect::back();

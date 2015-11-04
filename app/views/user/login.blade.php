@@ -28,6 +28,12 @@
 		font-size: 18px;
 	}
 
+	select {
+		font-family: 'Open Sans', sans-serif;
+		padding: 5px;
+		width: 205px;
+	}
+
 </style>
 <body>
 	{{ Form::open(['route'=>'api.store']) }}
@@ -47,7 +53,11 @@
 			{{ Form::password('password') }}
 		</div>
 
-		<div style="margin-left:115px;margin-top:5px;">
+		<div style="margin-top:4px;margin-left:86px;">
+			{{ Form::select('option', array('api' => 'API', 'crud'=> 'CRUD'), 'api') }}
+		</div>
+
+		<div style="margin-left:85px;margin-top:5px;">
 			{{ Form::submit('Login') }}
 		</div>
 	{{ Form::close() }}
