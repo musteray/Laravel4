@@ -54,7 +54,7 @@
 		</div>
 
 		<div style="margin-top:4px;margin-left:86px;">
-			{{ Form::select('option', array('api' => 'API', 'crud'=> 'CRUD'), 'api') }}
+			{{ Form::select('option', array('api' => 'API', 'crud'=> 'CRUD - Under Maintenance'), 'api') }}
 		</div>
 
 		<div style="margin-left:85px;margin-top:5px;">

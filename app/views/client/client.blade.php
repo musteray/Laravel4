@@ -1,5 +1,45 @@
 @extends('layout.default')
 
+@section('title')
+	<title>Client Laravel RestFUL CRUD</title>
+@stop
+
+@section('css')
+	<style>
+
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+		@import url(https://fonts.googleapis.com/css?family=Lora);
+
+		/*
+			font-family: 'Open Sans', sans-serif;
+			font-family: 'Lora', serif;
+		*/
+		
+		table, th, td {
+		    border: 1px solid gray;
+		    padding: 10px;
+		    font-family: 'Open Sans', sans-serif;
+		    margin-top: 15px;
+		    text-align: center;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+
+		button, input {
+			font-family: 'Open Sans', sans-serif;
+			padding: 5px;
+		}
+
+		h1 {
+			font-family: 'Open Sans', sans-serif;
+		}
+
+	</style>
+@stop
+
+
 @section('content')
 
 <div>
@@ -7,7 +47,7 @@
 	<div style="margin-left: 150px;">
 		{{ Form::open(array('url'=>'query', 'method'=>'GET')) }}
 			{{ Form::text('search') }}
-			{{ Form::submit('Search', array('class'=>'button')) }}
+			{{ Form::submit('Search') }}
 		{{ Form::close() }}
 	</div>
 </div>
@@ -38,5 +78,10 @@
  		@endforeach
 	</tbody>
 </table>
+@stop
+
+@section('script')
+{{ HTML::script('js/jquery.js') }}
+{{ HTML::script('js/delete.js') }}
 @stop
 

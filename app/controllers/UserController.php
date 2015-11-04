@@ -66,7 +66,7 @@ class UserController extends BaseController {
                 Session::flash('message', 'Please input your credentials.');
                 return Redirect::to('api');
             }else{
-                // dd(Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))));
+               
                 if( Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))) ) 
                 {
                     // Save to user_log table
@@ -75,7 +75,9 @@ class UserController extends BaseController {
                     $log->user_id = $id;
                     $log->login = date('Y-m-d H:i:s');
                     $log->save();
-                    //
+                    // End 
+
+                    Session::put('log_id', $log->id);
 
                     $option = Input::get('option');
 
