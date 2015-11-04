@@ -72,16 +72,14 @@ class ClientController extends \BaseController {
 		//
 		if( Auth::check() ){
 			if( empty(Input::get('Name')) ){
-				return "Hello";
+				return "Failed bro!";
 			}else{
 
-				// Save to client table
 				$client = new $this->client;
 				$client->Name = Input::get('Name');
 				$client->status = Input::get('status');
 				$client->type = Input::get('type');
 				$client->save();
-				// End 
 
 				$log_id = Session::get('log_id');
 				$user_id = Auth::id();
@@ -90,9 +88,9 @@ class ClientController extends \BaseController {
 				$uName = $this->user->find($user_id);
 
 				if( empty($ulog->purpose) ){
-					$ulog->purpose = $uName->username." added client ".Input::get('Name')." and";
+					$ulog->purpose = $uName->username." added client ".Input::get('Name')." and ";
 				}else{
-					$ulog->purpose = $ulog->purpose." added client ".Input::get('Name')." and";				
+					$ulog->purpose = $ulog->purpose."added client ".Input::get('Name')." and ";				
 				}
 
 				$ulog->save();
@@ -139,6 +137,37 @@ class ClientController extends \BaseController {
 	public function update($id)
 	{
 		//
+		if( Auth::check() ){
+			if( empty(Input::get('Name')) ){
+				return "Failed bro!";
+			}else{
+
+				$newclient = $this->client->find($id);
+
+				$log_id = Session::get('log_id');
+				$user_id = Auth::id();
+
+				$ulog = $this->userlog->find($log_id);
+				$uName = $this->user->find($user_id);
+
+				if( empty($ulog->purpose) ){
+					$ulog->purpose = $uName->Name." edited client ".$newclient->Name." to ".Input::get('Name')." and ";
+				}else{
+					$ulog->purpose = $ulog->purpose."edited client ".$newclient->Name." to ".Input::get('Name')." and ";
+				}
+
+				$ulog->save();
+
+				$newclient->Name = Input::get('Name');
+				$newclient->status = Input::get('status');
+				$newclient->type = Input::get('type');
+				$newclient->save();
+
+				return Redirect::to('crud');
+			}
+		}else{
+			return Redirect::to('api');
+		}
 	}
 
 
@@ -152,7 +181,6 @@ class ClientController extends \BaseController {
 	{
 		//
 		if( Auth::check() ){
-
 			$this->client->find($id)->delete();
 			return Redirect::back();
 		}else{
