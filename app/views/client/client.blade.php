@@ -19,7 +19,7 @@
 		    border: 1px solid gray;
 		    padding: 10px;
 		    font-family: 'Open Sans', sans-serif;
-		    margin-top: 15px;
+		    margin-top: 30px;
 		    text-align: center;
 		}
 
@@ -36,6 +36,20 @@
 			font-family: 'Open Sans', sans-serif;
 		}
 
+		a {
+			text-decoration: none;
+			font-family: 'Open Sans', sans-serif;
+			transition: color 1s; 
+		}
+
+		a:hover {
+			color: gray;
+		}
+
+		a:focus {
+			color: green;
+		}
+
 	</style>
 @stop
 
@@ -44,11 +58,15 @@
 
 <div>
 	<a href="crud/create" style="position:absolute;"><button>Add Client</button></a>
-	<div style="margin-left: 150px;">
+	<div style="margin-left: 140px;position:absolute;">
 		{{ Form::open(array('url'=>'query', 'method'=>'GET')) }}
 			{{ Form::text('search') }}
 			{{ Form::submit('Search') }}
 		{{ Form::close() }}
+	</div>
+
+	<div style="margin-left:390px;">
+		<a href="{{ URL::to('Logout') }}">Logout</a>
 	</div>
 </div>
 

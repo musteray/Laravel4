@@ -181,6 +181,22 @@ class ClientController extends \BaseController {
 	{
 		//
 		if( Auth::check() ){
+			$newclient = $this->client->find($id);
+
+			$log_id = Session::get('log_id');
+			$user_id = Auth::id();
+
+			$ulog = $this->userlog->find($log_id);
+			$uName = $this->user->find($user_id);
+
+			if( empty($ulog->purpose) ){
+				$ulog->purpose = $uName->Name." deleted client ".$newclient->Name." and ";
+			}else{
+				$ulog->purpose = $ulog->purpose."deleted client ".$newclient->Name." and ";
+			}
+
+			$ulog->save();
+
 			$this->client->find($id)->delete();
 			return Redirect::back();
 		}else{
@@ -212,6 +228,19 @@ class ClientController extends \BaseController {
 		{
 			return Redirect::to('api');
 		}
+	}
+
+	public function doLogout()
+	{
+		Auth::logout();
+
+		$id = Session::get("log_id");
+
+		$log = $this->userlog->find($id);
+		$log->logout = date('Y-m-d H:i:s');
+		$log->save();
+
+		return Redirect::to('api');
 	}
 
 

@@ -43,6 +43,7 @@ Route::resource('api', 'UserController');
 
 
 // Crud for Client 
+Route::get('Logout', 'ClientController@doLogout');
 Route::get('query', 'ClientController@searchData');
 Route::resource('crud', 'ClientController');
 
